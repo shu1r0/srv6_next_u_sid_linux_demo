@@ -187,7 +187,8 @@ def main():
     n6.cmd("ip -6 route replace fdbb:bbbb:0600::/48 encap seg6local action End flavors next-csid dev n6_n5", verbose=True)
     n6.cmd("ip -6 route add fdbb:bbbb:0600::/64 encap seg6local action End flavors psp dev n6_n5", verbose=True)
     
-    n1.cmd("ip -6 route add fd00:b::2/128 encap seg6 mode encap.red segs fdbb:bbbb:0500:0200:f00d:: dev n1_h1", verbose=True)
+    # n1.cmd("ip -6 route add fd00:b::2/128 encap seg6 mode encap.red segs fdbb:bbbb:0500:0200:f00d:: dev n1_h1", verbose=True)
+    n1.cmd("ip -6 route add fd00:b::2/128 encap seg6 mode encap segs fdbb:bbbb:0600::,fdbb:bbbb:0500:0200:f00d:: dev n1_h1", verbose=True)
     n2.cmd("ip -6 route add fd00:a::2/128 encap seg6 mode encap.red segs fdbb:bbbb:0600:0100:f00d:: dev n2_h2", verbose=True)
     
     h1.cmd("tcpdump -i h1_n1 -w captures/h1_n1.pcap &")
